@@ -1,7 +1,7 @@
 <template>
-    <div class="login-container">
-        <header>
-            <button class="back-button" @click="goBack">Назад</button>
+    <div class="login container">
+        <header class="form-header">
+            <button class="back-button" @click="goToPreviousPage">&lt;</button>
             <h1>Личные данные</h1>
             <div class="progress-bar">Прогресс бар</div>
             <div class="steps">
@@ -84,27 +84,21 @@
         const inputsKeys = Object.keys(inputData)
         inputsKeys.forEach((key) => inputData[key] = inputData[key].trim())
         // Если форматы даты и мейла корректные - вызываем функцию перехода на след страницу
-        /*if (dateFormatChecker(inputData.birthday) && emailFormatChecker(inputData.email)){
+        // Для мейла учитываем его необязательность
+
+        if (!dateFormatChecker(inputData.birthday)){
+            alert('Неверный формат даты (дд.мм.гггг)')
+        } 
+        else if (inputData.email && emailFormatChecker(inputData.email)){
+            alert('Неверный формат почты')
+        }
+        else {
             post(inputData)
                 .then((response) => {
                 goToNextPage(response, '/confirm')
             })
-        mock.onAny('/request')
+            mock.onAny('/request')
         }
-        else {
-            // Валидацию и высвечивание ошибок под инпутами - возможно, позже
-            alert('Неверный формат даты (дд.мм.гггг) и/или почты')
-        }*/
-        post(inputData)
-            .then((response) => {
-                goToNextPage(response, '/confirm')
-            })
-        mock.onAny('/request')
-    }
-
-    // Возврат назад
-    const goBack = () => {
-        goToPreviousPage();
     }
 
 </script>

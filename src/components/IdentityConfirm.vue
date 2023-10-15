@@ -1,5 +1,5 @@
 <template>
-    <div class="confirm-container">
+    <div class="confirm container">
         <h1>Подтверждение удаленной идентификации</h1>
         <h2>Мы отправили SMS с кодом на ваш номер телефона</h2>
         <form class="form" @submit.prevent="handleCodeCheck(code)">
@@ -42,7 +42,7 @@
     // Обработка проверки кода подтверждения, сейчас примет любой код лишь бы был
     const handleCodeCheck = (code:string) => {
         if (code){
-            post({code: 'ok'})
+            post({code})
             .then((response) => {
                 goToNextPage(response, '/conditions')
             })

@@ -1,6 +1,6 @@
 <template>
     <div>
-    CHECK
+    LOADING
     </div>
 </template>
 
