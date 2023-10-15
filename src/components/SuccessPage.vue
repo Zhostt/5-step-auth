@@ -1,6 +1,6 @@
 <template>
     <div>
-
+        HURRAH
     </div>
 </template>
 

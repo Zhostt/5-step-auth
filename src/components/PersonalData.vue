@@ -1,7 +1,7 @@
 <template>
     <div class="login-container">
         <header>
-            <button class="back-button">Назад</button>
+            <button class="back-button" @click="goBack">Назад</button>
             <h1>Личные данные</h1>
             <div class="progress-bar">Прогресс бар</div>
             <div class="steps">
@@ -14,7 +14,13 @@
                 <div class="inputs-container">
                     <span class="input-block" v-for="input in Object.keys(inputs)" :key="input">
                         <label :for="input" :value="input"></label>
-                        <input type="text" :name="input" :id="input" :placeholder="placeholders[input]" v-model="inputs[input]" >
+                        <input
+                        type="text"
+                        :name="input"
+                        :id="input"
+                        :required="isRequired(input)"
+                        :placeholder="placeholders[input]"
+                        v-model="inputs[input]" >
                     </span>
                 </div>
                 <div class="link">
@@ -35,7 +41,7 @@
     import {post} from '../utils/requests'
     import mock from '../server/MockServer'
     import {dateFormatChecker, emailFormatChecker, } from '../utils/utils'
-    import {goToNextPage, gotToPreviousPage} from '../router/routerFunctions'
+    import {goToNextPage, goToPreviousPage} from '../router/routerFunctions'
 
     type inputData = {
         surname: string,
@@ -44,8 +50,9 @@
         birthday: string,
         country: string,
         email: string,
-    }
+    };
 
+    // Состояние инпутов
     const inputs = {
         surname: '',
         name: '',
@@ -55,6 +62,7 @@
         email: '',
     } as inputData;
 
+    // Плейсхолдеры для генерации списка инпутов
     const placeholders = {
         surname: 'Фамилия*',
         name: 'Имя*',
@@ -64,12 +72,18 @@
         email: 'email',
     } as inputData;
 
-    // section for submit logic
+    // Проверка инпута на обязательность (по * в плейсхолдерах)
+    const isRequired = (key:string):boolean => {
+        const input = placeholders[key]
+        return input.includes('*')
+    }
+
+    // Логика отправки
     const submitHandler = (inputData:inputData) => {
-        // trim all values in inputs, dont care with mutating cause its state
+        // Трим всех значений состояния, мутацию здесь считаю приемлемой
         const inputsKeys = Object.keys(inputData)
         inputsKeys.forEach((key) => inputData[key] = inputData[key].trim())
-        // if date and email formats are right - post
+        // Если форматы даты и мейла корректные - вызываем функцию перехода на след страницу
         /*if (dateFormatChecker(inputData.birthday) && emailFormatChecker(inputData.email)){
             post(inputData)
                 .then((response) => {
@@ -78,7 +92,8 @@
         mock.onAny('/request')
         }
         else {
-            console.log('Неверный формат даты и/или почты')
+            // Валидацию и высвечивание ошибок под инпутами - возможно, позже
+            alert('Неверный формат даты (дд.мм.гггг) и/или почты')
         }*/
         post(inputData)
             .then((response) => {
@@ -87,6 +102,10 @@
         mock.onAny('/request')
     }
 
+    // Возврат назад
+    const goBack = () => {
+        goToPreviousPage();
+    }
 
 </script>
 

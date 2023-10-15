@@ -1,8 +1,8 @@
-import {axiosResponse} from 'axios'
+import {AxiosResponse} from 'axios'
 import router from './routes'
 
-// Переход по пути в случае успешного запроса, ошибка в случае неуспеха
-export const goToNextPage = (response:axiosResponse, path:url):never => {
+// Переход по пути в случае успешного запроса, переход на страницу ошибку в случае неуспеха
+export const goToNextPage = (response:AxiosResponse, path:string):void => {
     if (response.data.success){
         router.push(path)
     } else {
@@ -11,6 +11,6 @@ export const goToNextPage = (response:axiosResponse, path:url):never => {
 }
 
 // Функция для кнопки Назад - возврат на предыдущую страницу
-export const gotToPreviousPage = () => {
+export const goToPreviousPage = () => {
     router.go(-1)
 }
