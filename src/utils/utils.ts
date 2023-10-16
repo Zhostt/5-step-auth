@@ -43,6 +43,6 @@ export const formatSeconds = (seconds:number):string => {
 export const trimInputs = (inputs:object | inputData):object | inputData => {
   const result = {...inputs};
   const inputsKeys = Object.keys(result);
-  result.forEach((key) => inputData[key] = inputData[key].trim());
-  return result
+  inputsKeys.forEach((key) => result[key] = result[key].trim());
+  return result;
 }
