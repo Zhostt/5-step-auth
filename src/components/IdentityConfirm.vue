@@ -1,7 +1,9 @@
 <template>
     <div class="confirm container">
-        <h1>Подтверждение удаленной идентификации</h1>
-        <h2>Мы отправили SMS с кодом на ваш номер телефона</h2>
+        <div class="headers">
+            <h2>Подтверждение удаленной идентификации</h2>
+            <h3>Мы отправили SMS с кодом на ваш номер телефона</h3>
+        </div>
         <form class="form" @submit.prevent="handleSubmit(code)">
             <label for="code" class="input">
                 Код
@@ -11,7 +13,7 @@
             <input 
                 type="submit"
                 id="submit" name="submit"
-                :class="['submit-btn', {'active':code}]"
+                :class="['submit', {'disabled':!code}]"
                 :disabled="!code"
                 value="Проверить код" >
         </form>
@@ -50,8 +52,7 @@
 </script>
 
 <style scoped>
-    .active{
-        background-color: red;
+    .disabled{
+        background-color: rgb(215, 214, 214);
     }
-
 </style>

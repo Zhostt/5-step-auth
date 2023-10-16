@@ -1,9 +1,11 @@
 <template>
-    <div class="conditions container">
+    <div class="container">
         <header class="form-header">
             <button class="back-button" @click="goToPreviousPage">&lt;</button>
             <h1>Условия</h1>
-            <div class="progress-bar">Прогресс бар</div>
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
             <div class="steps">
                 <div>Шаг 5 из 5</div>
                 <div>Подписание договора</div>
@@ -13,8 +15,10 @@
         <body>
             <ul class="conditions-container">
                 <li class="condition-block" v-for="condition in conditionsData" :key="condition.id">
-                    <div class="condition-name">{{ condition.name }}</div>
-                    <div class="condition-value">{{ condition.value }}</div>
+                    <div class="conditions">
+                        <p class="condition-name">{{ condition.name }}</p>
+                        <p class="condition-value">{{ condition.value }}</p>
+                    </div>
                     <hr>
                 </li>
             </ul>
@@ -26,7 +30,7 @@
             </ul>
             <hr>
 
-            <button class="confirm" @click="handleSubmit">Подписать договор</button>
+            <button class="confirm submit" @click="handleSubmit">Подписать договор</button>
         </body>
     </div>
 </template>
@@ -63,4 +67,36 @@ const handleSubmit = () => {
 </script>
 
 <style scoped>
+.progress-container {
+  width: 100%;
+  background-color: #e1dddd;
+  height: 1em;
+  border-radius: 1em;
+  position: relative;
+}
+
+.progress-bar {
+  width: 100%; /* Ширина прогресса для 1 шага из 5 */
+  height: 100%;
+  background-color: rgb(67, 212, 67);
+  border-radius: 1em;
+  transition: width 0.5s;
+}
+
+.conditions{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.conditions-container{
+    padding: 0;
+
+}
+
+.links-container{
+    list-style-type: disc;
+    text-align: left;
+    padding-bottom: 1em;
+}
 </style>

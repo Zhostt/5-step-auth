@@ -5,7 +5,7 @@
             <p>Договор подписан.</p>
             <p>Ожидайте поступления денежных средств</p>
         </div>
-        <button class="complete-btn" @click="completeAuth">ОК</button>
+        <button class="complete-btn submit" @click="completeAuth">ОК</button>
     </div>
 </template>
 
