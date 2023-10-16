@@ -1,4 +1,5 @@
 import { Ref } from 'vue';
+import {inputData} from '../types/types';
 
 // Проверка формата даты dd.mm.yyyy
 export const dateFormatChecker = (date: string): boolean => {
@@ -40,7 +41,7 @@ export const formatSeconds = (seconds:number):string => {
   }
 
 // Трим значений в инпутах
-export const trimInputs = (inputs:object | inputData):object | inputData => {
+export const trimInputs = (inputs:inputData):inputData => {
   const result = {...inputs};
   const inputsKeys = Object.keys(result);
   inputsKeys.forEach((key) => result[key] = result[key].trim());

@@ -15,8 +15,6 @@
 </template>
 
 <script lang='ts' setup>
-import {post} from '../utils/requests'
-import {goToNextPage} from '../router/routerFunctions'
 import {onMounted} from 'vue'
 import useAuthStore from '../stores/AuthStore'
 

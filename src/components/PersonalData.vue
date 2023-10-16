@@ -42,7 +42,8 @@
     import mock from '../server/MockServer'
     import {dateFormatChecker, emailFormatChecker, trimInputs} from '../utils/utils'
     import {goToNextPage, goToPreviousPage, goToNextPageDirectly} from '../router/routerFunctions'
-    import useAuthStore, {inputData} from '../stores/AuthStore'
+    import useAuthStore from '../stores/AuthStore'
+    import {inputData} from '../types/types'
 
     const store =  useAuthStore();
 

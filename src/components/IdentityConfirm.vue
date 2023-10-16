@@ -44,7 +44,7 @@
 
     const handleSubmit = (code:string) => {
         if (code){
-            submit('IdentityConfirm','/conditions', {code}) // см confirmPageSubmit в сторе
+            submit('IdentityConfirm','/conditions', {code}); // см confirmPageSubmit в сторе
             };
     };
 </script>

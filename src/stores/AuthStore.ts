@@ -2,15 +2,10 @@ import {defineStore} from 'pinia'
 import _ from 'lodash'
 import {goToNextPage, goToNextPageDirectly} from '../router/routerFunctions'
 import {post} from '../utils/requests'
+import {inputData, StateKey} from '../types/types'
 
-export type inputData = {
-    surname: string,
-    name: string,
-    patronym: string,
-    birthday: string,
-    country: string,
-    email: string,
-};
+
+
 
 const useAuthStore = defineStore('auth', {
     // Состояние для сохранения данных при переходе между страницами 
@@ -48,7 +43,7 @@ const useAuthStore = defineStore('auth', {
 
         // Логика для комопонентов с простым сабмитом - "Ок", "Подтверждаю" и тп
         // Переключение значения "Посещено-Подтверждено" по ключу в состоянии
-        confirmPage(stateKey:string) {
+        confirmPage(stateKey:StateKey) {
             if (typeof(this[stateKey]) === 'boolean'){
                 this[stateKey] = true;
             };
@@ -61,7 +56,7 @@ const useAuthStore = defineStore('auth', {
             })
         },
         // Полный сабмит для простых страниц с проверкой на то, посещались ли они уже
-        confirmPageSubmit(stateKey:string, pathToNext:string, data:object={}) {
+        confirmPageSubmit(stateKey:StateKey, pathToNext:string, data:object={}) {
             // Если страница уже была посещена - просто переходим на следующую без запроса
             if (this[stateKey]) {
                 console.log('Simple page already visited. No request neeeded.')
