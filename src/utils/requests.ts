@@ -8,8 +8,9 @@ const headers = {
 
 // Проверка реквеста на соответствие нашим требованиям к заголовкам
 export const checkRequest = (request:AxiosRequestConfig):boolean => {
-    if (request.headers['Content-Type'] === headers['Content-Type'] && request.headers['Authorization'] === headers['Authorization']) {
-        console.log('request headers correct. Request data: ', request.data)
+    if (request.headers['Content-Type'] === headers['Content-Type']
+        && request.headers['Authorization'] === headers['Authorization']) {
+        console.log('request headers correct')
         return true;
     }
     console.log('Request headers error')

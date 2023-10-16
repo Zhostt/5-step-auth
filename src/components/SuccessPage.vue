@@ -10,15 +10,12 @@
 </template>
 
 <script lang='ts' setup>
-import {post} from '../utils/requests'
-import {goToNextPage} from '../router/routerFunctions'
+import useAuthStore from '../stores/AuthStore'
 
-const completeAuth = (() => {
-    post()
-    .then((res) => {
-        goToNextPage(res, '/')
-    })
-})
+const store = useAuthStore()
+
+// Завершаем авторизацию, обнуляем стор
+const {completeAuth} = store
 </script>
 
 <style scoped>

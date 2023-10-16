@@ -18,16 +18,25 @@
 import {post} from '../utils/requests'
 import {goToNextPage} from '../router/routerFunctions'
 import {onMounted} from 'vue'
+import useAuthStore from '../stores/AuthStore'
 
-const delay = 7
+// Сколько секунд идет имитация загрузки
+const delay = 5
 
+
+// Подтверждение данных, переход на следующую страницу
+const store = useAuthStore();
+const submit = store.confirmPageSubmit
+
+const handleSubmit = () => {
+    submit('AwaitCheck', '/success') // см confirmPageSubmit в сторе
+};
+
+// При монтировании запускаем таймер, по истечению - сабмит выше
 onMounted(() => {
     setTimeout(() => {
-        post()
-        .then((response) => {
-            goToNextPage(response, '/success')
-        })
-    }, delay*1000);
+         handleSubmit();
+        }, delay*1000)
 })
 </script>
 

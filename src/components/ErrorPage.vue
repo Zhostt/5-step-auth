@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="error-page">
         Ошибка запроса. Вернитесь назад и повторите отправку.
     </div>
 </template>

@@ -2,7 +2,7 @@
     <div class="confirm container">
         <h1>Подтверждение удаленной идентификации</h1>
         <h2>Мы отправили SMS с кодом на ваш номер телефона</h2>
-        <form class="form" @submit.prevent="handleCodeCheck(code)">
+        <form class="form" @submit.prevent="handleSubmit(code)">
             <label for="code" class="input">
                 Код
                 <input type="number" name="code" id="code" v-model="code">
@@ -24,9 +24,7 @@
 <script lang="ts" setup>
     import {ref, computed, onMounted } from 'vue'
     import {formatSeconds, countdown} from '../utils/utils'
-    import {post} from '../utils/requests'
-    import {goToNextPage} from '../router/routerFunctions'
-
+    import useAuthStore from '../stores/AuthStore'
 
     // Состояния инпута кода подтверждения (инпут + класс active на кнопке проверки)
     const code:string = '';
@@ -40,14 +38,15 @@
     const secondsFormatted = computed(() => formatSeconds(seconds.value));
 
     // Обработка проверки кода подтверждения, сейчас примет любой код лишь бы был
-    const handleCodeCheck = (code:string) => {
+    // Используем типовую фию сабмита из стора
+    const store = useAuthStore();
+    const submit = store.confirmPageSubmit
+
+    const handleSubmit = (code:string) => {
         if (code){
-            post({code})
-            .then((response) => {
-                goToNextPage(response, '/conditions')
-            })
-        }
-    }
+            submit('IdentityConfirm','/conditions', {code}) // см confirmPageSubmit в сторе
+            };
+    };
 </script>
 
 <style scoped>

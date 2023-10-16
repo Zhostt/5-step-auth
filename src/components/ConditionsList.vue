@@ -33,8 +33,10 @@
 
 <script lang="ts" setup>
 import {onMounted, ref} from 'vue'
-import {goToNextPage, goToPreviousPage} from '../router/routerFunctions'
-import {getData, post} from '../utils/requests'
+import {goToPreviousPage} from '../router/routerFunctions'
+import {getData} from '../utils/requests'
+import useAuthStore from '../stores/AuthStore'
+
 
 // Тип для присланного с бэка условия
 type Condition = {id: string, name: string, value: string}
@@ -52,12 +54,12 @@ onMounted(async() => {
 })
 
 // Подтверждение данных, переход на следующую страницу
+const store = useAuthStore();
+const submit = store.confirmPageSubmit
+
 const handleSubmit = () => {
-    post()
-        .then((response) => {
-            goToNextPage(response, '/loading')
-        })
-}
+    submit('ConditionsList', '/loading') // см confirmPageSubmit в сторе
+};
 </script>
 
 <style scoped>
