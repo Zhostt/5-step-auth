@@ -26,7 +26,7 @@
             </ul>
             <hr>
 
-            <button class="confirm" @click="submitHandler">Подписать договор</button>
+            <button class="confirm" @click="handleSubmit">Подписать договор</button>
         </body>
     </div>
 </template>
@@ -52,7 +52,7 @@ onMounted(async() => {
 })
 
 // Подтверждение данных, переход на следующую страницу
-const submitHandler = () => {
+const handleSubmit = () => {
     post()
         .then((response) => {
             goToNextPage(response, '/loading')

@@ -1,13 +1,62 @@
 <template>
-    <div>
-    LOADING
+    <div class="loading container">
+        <div class="spinner-block">
+            <div class="spinner"></div>
+        </div>
+
+        <div class="loading-text">
+           <p>Проверка ваших данных!</p>
+           <p>Это займет до 30 минут!</p>
+           <p>(На самом деле {{delay}} секунд)</p>
+        </div>
+        <button @click="onSubmit"></button>
     </div>
+
+
 </template>
 
-<script setup>
+<script lang='ts' setup>
+import {post} from '../utils/requests'
+import {goToNextPage} from '../router/routerFunctions'
+import {onMounted} from 'vue'
 
+const delay = 7
+
+onMounted(() => {
+    setTimeout(() => {
+        post()
+        .then((response) => {
+            goToNextPage(response, '/success')
+        })
+    }, delay*1000);
+})
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+.spinner-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40%;
+    margin: 5%;
+    }
 
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.3);
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  width: 5em;
+  height: 5em;
+  max-width: 50%;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 </style>

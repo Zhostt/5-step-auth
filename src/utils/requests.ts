@@ -24,11 +24,10 @@ export const post = (data:object={}, path:string = defaultPath) => {
         data,
         headers,
     };
-    console.log('1', config)
     return axios(config)
 };
 
-// фнукция для ГЕТ (получаем расчитанные данные с сервера)
+// функция для ГЕТ (получаем расчитанные данные с сервера)
 export const getData = (data:object={}, path:string = defaultPath) => {
     const config = {
         method: 'get',
@@ -36,6 +35,5 @@ export const getData = (data:object={}, path:string = defaultPath) => {
         data,
         headers,
     };
-    console.log('2', config)
     return axios(config)
 };
