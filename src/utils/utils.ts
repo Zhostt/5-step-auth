@@ -38,3 +38,11 @@ export const formatSeconds = (seconds:number):string => {
       return seconds + ' секунд';
     }
   }
+
+// Трим значений в инпутах
+export const trimInputs = (inputs:object | inputData):object | inputData => {
+  const result = {...inputs};
+  const inputsKeys = Object.keys(result);
+  result.forEach((key) => inputData[key] = inputData[key].trim());
+  return result
+}

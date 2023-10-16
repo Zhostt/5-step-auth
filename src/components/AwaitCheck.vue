@@ -9,7 +9,6 @@
            <p>Это займет до 30 минут!</p>
            <p>(На самом деле {{delay}} секунд)</p>
         </div>
-        <button @click="onSubmit"></button>
     </div>
 
 

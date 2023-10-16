@@ -40,27 +40,14 @@
 <script lang="ts" setup>
     import {post} from '../utils/requests'
     import mock from '../server/MockServer'
-    import {dateFormatChecker, emailFormatChecker, } from '../utils/utils'
-    import {goToNextPage, goToPreviousPage} from '../router/routerFunctions'
+    import {dateFormatChecker, emailFormatChecker, trimInputs} from '../utils/utils'
+    import {goToNextPage, goToPreviousPage, goToNextPageDirectly} from '../router/routerFunctions'
+    import useAuthStore, {inputData} from '../stores/AuthStore'
 
-    type inputData = {
-        surname: string,
-        name: string,
-        patronym: string,
-        birthday: string,
-        country: string,
-        email: string,
-    };
+    const store =  useAuthStore();
 
     // Состояние инпутов
-    const inputs = {
-        surname: '',
-        name: '',
-        patronym: '',
-        birthday: '',
-        country: '',
-        email: '',
-    } as inputData;
+    const inputs = {...store.getPersonInputData};
 
     // Плейсхолдеры для генерации списка инпутов
     const placeholders = {
@@ -79,27 +66,34 @@
     }
 
     // Логика отправки
-    const submitHandler = (inputData:inputData) => {
-        // Трим всех значений состояния, мутацию здесь считаю приемлемой
-        const inputsKeys = Object.keys(inputData)
-        inputsKeys.forEach((key) => inputData[key] = inputData[key].trim())
+    const submitHandler = (inputs:inputData) => {
+
+        // Трим всех значений состояния
+        const inputData = trimInputs(inputs);
+
         // Если форматы даты и мейла корректные - вызываем функцию перехода на след страницу
         // Для мейла учитываем его необязательность
-
         if (!dateFormatChecker(inputData.birthday)){
             alert('Неверный формат даты (дд.мм.гггг)')
         } 
         else if (inputData.email && emailFormatChecker(inputData.email)){
             alert('Неверный формат почты')
         }
+
+        // Если все ок - проверяем, слать ли запрос на сервер и шлем, если инпуты менялись.
         else {
-            post(inputData)
-                .then((response) => {
-                goToNextPage(response, '/confirm')
-            })
-            mock.onAny('/request')
-        }
-    }
+            if(store.inputsChanged(inputData)){ // Проверка на измененение инпутов, если менялись
+                store.setPersonInputData(inputData); // Сохраняем инпуты в общем состоянии, чтобы были заполнены при возврате назад
+                post(inputData) // И отправляем запрос, после переходим на след страницу
+                    .then((response) => {
+                    goToNextPage(response, '/confirm'); // goToNextPage проверяет, на указанный путь слать или на страницу ошибки
+                    })
+                mock.onAny('/request'); // мок-сервер ловит запросы
+            } else {
+                goToNextPageDirectly('/confirm') // Если инпуты не менялись - то просто идем на след страницу
+            };
+        };
+    };
 
 </script>
 
