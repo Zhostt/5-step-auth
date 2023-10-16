@@ -29,7 +29,7 @@
     import useAuthStore from '../stores/AuthStore'
 
     // Состояния инпута кода подтверждения (инпут + класс active на кнопке проверки)
-    const code:string = '';
+    let code:string = '';
 
     // Логика таймера обратного отсчета
     const seconds = ref(80);
