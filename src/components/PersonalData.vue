@@ -79,10 +79,9 @@
         if (!dateFormatChecker(inputData.birthday)){
             alert('Неверный формат даты (дд.мм.гггг)')
         } 
-        else if (inputData.email && emailFormatChecker(inputData.email)){
+        else if (inputData.email && !emailFormatChecker(inputData.email)){
             alert('Неверный формат почты')
         }
-
         // Если все ок - проверяем, слать ли запрос на сервер и шлем, если инпуты менялись.
         else {
             if(store.inputsChanged(inputData)){ // Проверка на измененение инпутов, если менялись

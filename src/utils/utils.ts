@@ -9,8 +9,8 @@ export const dateFormatChecker = (date: string): boolean => {
   
 // Проверка формата электронной почты
 export const emailFormatChecker = (email: string): boolean => {
-const emailFormatRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-return emailFormatRegex.test(email);
+    const emailFormatRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailFormatRegex.test(email);
 };
 
 // Функция ожидания (по умолчанию секунда)
