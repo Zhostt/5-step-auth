@@ -1,7 +1,8 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  line-height: 1;
   font-weight: 400;
+  font-size: 16px;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -13,6 +14,73 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container{
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10vh 5vw;
+}
+
+header, body {
+  width: 100%;
+}
+
+input{
+  height: 2em;
+  margin: 1em;
+  padding: 1em;
+  border: 1px solid grey;
+  border-radius: 0.3em;
+  font-size: 1rem;
+}
+
+.back-button{
+  position: absolute;
+  left: 5%;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  color: #646cff;
+  font-size: 3em;
+}
+
+
+.steps{
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1em;
+}
+
+button,
+.submit{
+  padding: 2em;
+  color:#f9f9f9;
+  background-color: #646cff;
+  border: 0;
+  border-radius: 2em;
+  display: inline-flex;
+  align-items: center;
+  line-height: 0em;
+  font-size: 1rem;
+}
+
+ul {
+  list-style-type: none;
+}
+
 
 a {
   font-weight: 500;
@@ -32,66 +100,6 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 1em;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-}
-
-header, body {
-  width: 100%;
-}
-
-input{
-  height: 2em;
-  margin: 1em;
-  padding: 1em;
-  border: 1px solid grey;
-  border-radius: 0.3em;
-}
-
-.back-button{
-  position: absolute;
-  top: 2em;
-  left: 5%;
-  border: 0;
-  padding: 0;
-  background-color: transparent;
-  color: #646cff;
-  font-size: 3em;
-}
-
-.container{
-  max-width: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.steps{
-  display: flex;
-  justify-content: space-between;
-  padding-top: 1em;
-}
-
-button,
-.submit{
-  padding: 2em;
-  color:#f9f9f9;
-  background-color: #646cff;
-  border: 0;
-  border-radius: 2em;
-  display: inline-flex;
-  align-items: center;
-  line-height: 0em;
-}
-
-ul {
-  list-style-type: none;
-}
 
 @media (prefers-color-scheme: light) {
   :root {

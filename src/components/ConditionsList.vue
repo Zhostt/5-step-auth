@@ -91,12 +91,10 @@ const handleSubmit = () => {
 
 .conditions-container{
     padding: 0;
-
 }
 
 .links-container{
     list-style-type: disc;
     text-align: left;
-    padding-bottom: 1em;
 }
 </style>
